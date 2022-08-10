@@ -1,0 +1,216 @@
+async function enviarScript(scriptText){
+
+    const lines = scriptText.split(/[\n\t]+/).map(line => line.trim()).filter(line => line);
+    main = document.querySelector("#main"),
+    textarea = main.querySelector(`div[contenteditable="true"]`)
+    
+    if(!textarea) throw new Error("Não há uma conversa aberta")
+    
+    for(const line of lines){
+        console.log(line)
+    
+        textarea.focus();
+        document.execCommand('insertText', false, line);
+        textarea.dispatchEvent(new Event('change', {bubbles: true}));
+    
+        setTimeout(() => {
+            (main.querySelector(`[data-testid="send"]`) || main.querySelector(`[data-icon="send"]`)).click();
+        }, 100);
+        
+        if(lines.indexOf(line) !== lines.length - 1) await new Promise(resolve => setTimeout(resolve, 250));
+    }
+    
+    return lines.length;
+}
+
+enviarScript(`
+
+PADRE’Acho que nosso caso é sem jeito, João. Uma vez estudei uma lição
+sobre isso e sei que em Deus não existe contradição entre a justiça
+e a misericórdia. Já fomos julgados pela justiça, a misericórdia dirá a
+mesma coisa.
+JOÃO GRILO E quem foi que disse que nós já fomos julgados pela justiça?
+PADRE Você mesmo ouviu Nosso Senhor dizer que a situação era difícil.
+JOÃO GRILO E difícil quer dizer sem jeito? Sem jeito! Sem jeito por quê?
+Vocês são uns pamonhas, qualquer coisinha estão arriando. Não vê
+que tiveram tudo na terra? Se tivessem tido que agüentar o rojão de
+João Grilo, passando fome e comendo macambira na seca, garanto
+que tinham mais coragem. Quer ver eu dar um jeito nisso, Padre João?
+PADRE Quero, Joca.
+
+JOÃO GRILO Agora é Joca, hem? E você, Senhor Bispo?
+BISPO Eu também, João.
+JOÃO GRILOPadeiro?
+PADEIRO Veja o que pode fazer, João.
+JOÃO GRILO Severino? Mulher e cabra?
+MULHER Nós também. Nossa esperança é você.
+JOÃO GRILO Tudo precisando de João Grilo! Pois vou dar um jeito.
+ENCOURADO É isso que eu quero ver.
+MANUEL Com quem você vai se pegar, João? Com algum santo?
+
+JOÃO GRILO O senhor não repare não, mas de besta eu só tenho a cara. Meu trunfo é maior do que qualquer santo.
+MANUELQuem é?
+JOÃO GRILOA mãe da justiça.
+ENCOURADO, rindo Ah, a mãe da justiça! Quem é essa?
+MANUELNão ria, porque ela existe.
+BISPOE quem é?
+MANUEL A misericórdia.
+SEVERINO Foi coisa que nunca conheci. Onde mora?E como chamá-la?
+JOÃO GRILO Ah isso é comigo. Vou fazer um chamado especial, em verso.
+Garanto que ela vem, querem ver? (Recitando).
+
+Valha-me Nossa Senhora,
+Mãe de Deus de Nazaré!
+A vaca mansa dá leite,
+A braba dá quando quer.
+A mansa dá sossegada,A braba levanta o pé.
+Já fui barco, fui navio,
+Mas hoje sou escaler.
+Já fui menino, fui homem,
+Só me falta ser mulher.
+
+ENCOURADO Vá vendo a falta de respeito, viu?
+JOÃO GRILO Falta de respeito nada, rapaz! Isso é o versinho de Canário Pardo
+que minha mãe cantava para eu dormir. Isso tem nada de falta de respeito!
+Já fui barco, fui navio,
+Mas hoje sou escaler.
+Já fui menino, fui homem,
+Só me falta ser mulher.
+Valha-me Nossa Senhora,
+Mãe de Deus de Nazaré.
+Cena igual à da aparição de Nosso Senhor, e Nossa Senhora, A
+Compadecida, entra.
+ENCOURADO, com raiva surda Lá vem a compadecida! Mulher em tudo se mete!170
+JOÃO GRILO Falta de respeito foi isso agora, viu? A senhora se zangou com o verso que eu recitei?
+A COMPADECIDA Não, João, por que eu iria me zangar? Aquele é o versinho que Canário Pardo escreveu para mim e que eu agradeço. Não deixa deser uma oração, uma invocação. Tem umas graças, mas isso até a torna alegre e foi coisa de que eu sempre gostei. Quem gosta de tristeza é o diabo.
+JOÃO GRILO É porque esse camarada aí, tudo o que se diz ele enrasca a gente,
+dizendo que é falta de respeito.
+A COMPADECIDA É máscara dele, João. Como todo fariseu, o diabo é muito apegado às formas exteriores. É um fariseu consumado.
+ENCOURADO Protesto.
+MANUEL Eu já sei que você protesta, mas não tenho o que fazer, meu velho. Discordar de minha mãe é que não vou.
+
+ENCOURADOGrande coisa esse chamego que ela faz para salvar todo mundo! Termina desmoralizando tudo.
+SEVERINO Você só fala assim porque nunca teve mãe.
+JOÃO GRILO É mesmo, um sujeito ruim desse, só sendo filho de chocadeira!
+A COMPADECIDA E para que foi que você me chamou, João?
+JOÃO GRILO É que esse filho de chocadeira quer levar a gente para o inferno. Eu só podia me pegar com a senhora mesmo.
+ENCOURADO As acusações são graves. Seu filho mesmo disse que há tempo não via tanta coisa ruim junta.
+A COMPADECIDA Ouvi as acusações.
+ENCOURADO E então?
+JOÃO GRILOE então? Você ainda pergunta? Maria vai-nos defender. Padre João, puxe aí uma Ave-Maria!
+PADRE, ajoelhando-se
+Ave-Maria, cheia de graça, o Senhor é convosco, bendita sois vós
+entre as mulheres, bendito é o fruto de vosso ventre, Jesus.
+JOÃO GRILO Um momento, um momento. Antes de respondermos, lembrem-se
+de dizer, em vez de “agora e na hora de nossa morte”, “agora na
+hora de nossa morte”, porque do jeito que nós estamos, está tudo misturado.
+TODOS Santa Maria, mãe de Deus, rogai por nós pecadores, agora na hora
+de nossa morte. Amém.
+A COMPADECIDA Não precisava fazer a modificação, João. Eu entenderia.
+JOÃO GRILO É, a senhora eu acredito que entendesse, mas aquele sujeito ali, com muito menos do que isso, faz uma confusão.
+
+A COMPADECIDA Está bem, vou ver o que posso fazer.
+JOÃO GRILO, ao EncouradoEstá vendo? Isso aí é gente e gente boa, não é filha de chocadeira não! Gente como eu, pobre, filha de Joaquim e de Ana, casada com
+um carpinteiro, tudo gente boa. 
+MANUEL E eu, João? Estou esquecido nesse meio?
+JOÃO GRILO Não é o que eu digo, Senhor? A distância entre nós e o Senhor é muito grande. Não é por nada não, mas sua mãe é gente como eu, só que gente muito boa, enquanto que eu não valho nada. (Ocorrendo-lhe a brincadeira.) Mas com toda desgraça, acho que ou menos ruim do que o sacristão.
+A COMPADECIDA Intercedo por esses pobres que não têm ninguém por eles, meu filho. Não os condene.
+MANUEL Que é que eu posso fazer? Esse aí era um bispo avarento, simoníaco, político...
+
+A COMPADECIDA Mas isso é a única coisa que se pode dizer contra ele. E era trabalhador, cumpria suas obrigações nessa parte. Era de nossolado e quem não é contra nós é por nós.
+MANUELO padre e o sacristão... Gesto de desânimo.
+A COMPADECIDA É verdade que não eram dos melhores, mas você precisa levar em conta a língua do mundo e o modo de acusar do diabo. O
+bispo trabalhava e por isso era chamado de político e de mero administrador. Já com esses dois a acusação é pelo outro lado. É
+verdade que eles praticaram atos vergonhosos, mas é preciso levar em conta a pobre e triste condição do homem. A carne implica todas
+essas coisas turvas e mesquinhas. Quase tudo o que eles faziam  era por medo. Eu conheço isso, porque convivi com os homens:
+começam com medo, coitados, e terminam por fazer o que não presta, quase sem querer. É medo.
+ENCOURADO Medo? Medo de quê?
+BISPO Ah, senhor, de muitas coisas. Medo da morte...
+
+PADRE Medo do sofrimento...
+SACRISTÃO Medo da fome...
+PADEIROMedo da solidão. Perdoei minha mulher na hora da morte, porque a amava e porque sempre tive um medo terrível da solidão.
+MANUEL E é a mim que vocês vêm dizer isso, a mim que morri abandonado até por meu pai!
+A COMPADECIDA Era preciso e eu estava a seu lado. Mas não se esqueça da noite no jardim, do medo por que você teve de passar, pobre homem, feito de carne e de sangue, como qualquer outro e, como qualquer outro também, abandonado diante da morte e do sofrimento.
+JOÃO GRILO Ouvi dizer que até suar sangue o senhor suou.
+MANUEL É verdade, João, mas você não sabe do que está falando. Só eu sei o que passei naquela noite.
+
+A COMPADECIDA Seja então compassivo com quem é fraco.
+MANUEL Mas esses dois? Você mesma via daqui e comentava o que eles faziam com João Grilo e os outros empregados na padaria!
+JOÃO GRILOSe é por mim, não há dificuldade, porque eu sou tão sem-vergonha, que já me esqueci de tudinho.
+MANUEL Devia ter esquecido lá, João. Pode alegar alguma coisa em favor deles?
+A COMPADECIDA O perdão que o marido deu à mulher na hora da morte, abraçandose com ela para morrerem juntos.
+MANUEL Isso pode se dizer em favor dele. Mas ela?
+ENCOURADO Enganava o marido com todo mundo.
+
+MULHER Porque era maltratada por ele. Logo no começo de nosso casamento, começou a me enganar. A senhora não sabe o que eu passei, porque nunca foi moça pobre casada com homem rico, como eu. Amor com amor se paga.
+A COMPADECIDA Eu entendo tudo isso mais do que você pensa. Sei o que as mulheres passam no mundo, se bem que não tenha do que me queixar, porque meu marido era o que se pode chamar um santo.
+JOÃO GRILOGrande novidade!
+A COMPADECIDA O que, João?
+JOÃO GRILO Falei não.
+ENCOURADO Falou, sim. Ele disse: “Grande novidade.”
+A COMPADECIDA Na verdade, João tem toda razão. Falei assim por falar, mas que São José era um santo, não é nenhuma novidade.
+
+ENCOURADO A senhora está falando muito e vê-se perfeitamente sua proteção com esses nojentos, mas nada pôde dizer ainda em favor da mulher do padeiro.
+A COMPADECIDA Já aleguei sua condição de mulher, escravizada pelo marido e sem grande possibilidade de se libertar. Que posso alegar ainda em seu favor?
+PADEIRO A prece que fiz por ela antes de morrer. O mais ofendido pelos atos que ela praticava era eu e, no entanto, rezei por ela. Isso deve ter algum valor.
+A COMPADECIDA E tem. Alego isso em favor dos dois.
+MANUEL Está recebida a alegação.
+A COMPADECIDA Quanto a Severino e ao cabra dele...
+MANUEL Quanto a esses, deixe comigo. Estão ambos salvos.
+179
+ENCOURADO É um absurdo contra o qual...
+MANUEL Contra o qual já sei que você protesta, mas não recebo seu protesto. Você não entende nada dos planos de Deus. Severino e o cangaceiro dele foram meros instrumentos de sua cólera.
+Enlouqueceram ambos, depois que a polícia matou a família deles e não eram responsáveis por seus atos. Podem ir para ali. Severino e o Cangaceiro abraçam os companheiros e saem para o céu.
+BISPO E nós?
+SACRISTÃO Decida-se logo, por favor, porque essa ansiedade é pior do que qualquer outra coisa.
+MANUEL Não diga isso, você não sabe o que se passa lá. Qualquer ansiedade é melhor do que aquilo.
+ENCOURADO É, mas não posso ficar eternamente à espera. Qual é a sentença?
+
+A COMPADECIDA Um momento, meu filho. Antes de dizer qualquer coisa, não se esqueça de que o frade absolveu a todos condicionalmente e rezou por eles.
+MANUEL Pois não. Vou então proferir a sentença.
+JOÃO GRILO Um momento, senhor. Posso dar uma palavra?
+MANUEL Você o que é que acha, minha mãe?
+A COMPADECIDA Deixe João falar.
+MANUEL Fale, João.
+JOÃO GRILO Os cinco últimos lugares do purgatório estão desocupados?
+MANUEL Estão.
+JOÃO GRILO Pegue esses cinco camaradas e bote lá.
+A COMPADECIDA É uma boa solução, meu filho. Dá para eles pagarem o muito que fizeram e assegura a sua salvação.
+JOÃO GRILO E tem a vantagem de descontentar aquele camarada ali que é pior do que carne de cobra. Não está vendo ele ali, de costas?
+MANUEL Estou.
+JOÃO GRILO Isso é de ruim.
+MANUEL Minha mãe o que é que acha?
+A COMPADECIDA Eu ficaria muito satisfeita.
+MANUEL Então está concedido.
+ENCOURADO Não tem jeito não. Homem que mulher governa...
+MANUEL Podem ir, vocês cinco.
+Os cinco se despedem comovidamente de João Grilo.
+JOÃO GRILO Muito bem. Desmanchem essa cara de enterro e boa viagem para todos.
+Saem todos.
+MANUELE agora, nós, João Grilo. Por que sugeriu o negócio para os outros e ficou de fora?
+JOÃO GRILO Porque, modéstia à parte, acho que meu caso é de salvação direta.
+ENCOURADO Era o que faltava! E a história que estava preparada para a mulher do padeiro?
+MANUEL É, João, aquilo foi grave.
+JOÃO GRILO E o senhor vai dar uma satisfação a esse sujeito, me desgraçando para o resto da vida? Valha-me Nossa Senhora, mãe de Deus de Nazaré, já fui menino, fui homem...
+A COMPADECIDA, sorrindo Só lhe falta ser mulher, João, já sei. Vou ver o que posso fazer. (A Manuel.) Lembre-se de que João estava se preparando para morrer quando o padre o interrompeu.
+
+ENCOURADO É, e apesar de todo o aperreio, ele ainda chamou o padre de  cachorro bento.
+A COMPADECIDA João foi um pobre como nós, meu filho. Teve de suportar as maiores dificuldades, numa terra seca e pobre como a nossa. Não o condene, deixe João ir para o purgatório.
+JOÃO GRILOPara o purgatório? Não, não faça isso assim não. (Chamando a Compadecida à parte.) Não repare eu dizer isso mas é que o diabo é muito negociante e com esse povo a gente pede o mais para impressionar. A senhora pede o céu, porque aí o acordo fica mais
+fácil a respeito do purgatório.
+A COMPADECIDA Isso dá certo lá no sertão, João! Aqui se passa tudo de outro jeito!
+Que é isso? Não confia mais na sua advogada?
+JOÃO GRILO Confio, Nossa Senhora, mas esse camarada enrolando nós dois.
+A COMPADECIDA Deixe comigo. (A Manuel.) Peço-lhe então, muito simplesmente, que não condene João.
+
+MANUEL O caso é duro. Compreendo as circunstâncias em que João viveu, mas isso também tem um limite. Afinal de contas, o mandamento existe e foi transgredido. Acho que não posso salvá-lo.A COMPADECIDA Dê-lhe então outra oportunidade.
+MANUEL Como?
+A COMPADECIDA Deixe João voltar.
+MANUEL Você se dá por satisfeito?
+JOÃO GRILO Demais. Para mim é até melhor, porque daqui para lá eu tomo cuidado para a hora de morrer e não passo nem pelo purgatório, para não dar gosto ao cão.
+A COMPADECIDA Então fica satisfeito?
+JOÃO GRILO Eu fico. Quem deve estar danado é o filho de chocadeira.
+
+=
+`).then(e => console.log(`Código finalizado, ${e} mensagens enviadas`)).catch(console.error)
